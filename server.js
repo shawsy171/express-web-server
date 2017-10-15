@@ -19,12 +19,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  res.render('maintenance.hbs', {
-    pageTitle: 'Maintenance Page',
+// app.use((req, res, next) => {
+//   res.render('maintenance.hbs', {
+//     pageTitle: 'Maintenance Page',
+//   })
+// })
 
-  })
-})
 // helper function
 hbs.registerHelper('getCurrentYear', () => {
   return new Date().getFullYear()
@@ -38,6 +38,7 @@ hbs.registerHelper('screamIt', (text) => {
 // register midddleware
 app.use(express.static(__dirname + '/public'))
 
+// routing for home page 
 app.get('/',(req, res) => {
   res.render('home.hbs', {
     pageTitle: 'Home Page',
@@ -45,12 +46,20 @@ app.get('/',(req, res) => {
   });
 });
 
+// routing for about page
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'About Page'
   });
 });
 
+app.get('/projects', (req, res) => {
+  res.render('projects.hbs', {
+    pageTitle: 'Projects'
+  })
+});
+
+// routing for bad page example
 app.get('/bad', (req, res) => {
   res.send({
     errorMessage: 'Some thing went wrong'
